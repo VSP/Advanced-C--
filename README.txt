@@ -1,0 +1,1 @@
+g++ -o game.exe *.cpp -Iengine engine/libengine.a

@@ -148,7 +148,7 @@ void Game::Play()
 		}
 		else
 		{
-		 throw UCMD("Say again? /n");;
+		 throw UCMD("Say again?\n");;
 		}
 	}catch(UCMD & e){
 		renderer->Render(e.what());
@@ -172,11 +172,11 @@ void Game::Play()
 		
 	}
   
-  
+  }
   // final message to player
   getline(cin,cmd);
   renderer->Render("Exiting, bye!\n");
-  }
+  
 }
 ////////////////////////////////////////////////////////////////////////////////
 void

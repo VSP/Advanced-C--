@@ -169,6 +169,7 @@ void Game::Play()
 	
 	}catch (DeadPCError & e){
 		renderer->Render(e.what());
+		SetRunning(false);
 		
 	}
   

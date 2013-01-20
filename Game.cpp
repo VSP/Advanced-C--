@@ -26,7 +26,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 using namespace std;
 #define DEV_NAME "anssi.grohn@pkamk.fi"
-#define YEAR 2011
+#define YEAR 2013
 
 ////////////////////////////////////////////////////////////////////////////////
 Game::Game() : running(true)
@@ -138,7 +138,7 @@ void Game::Play()
 	try
 	{
 		//Make this a bit better
-		if(cmd == "search"||cmd =="quit"||cmd =="attack"||cmd =="move north"||cmd =="move south"||cmd =="save")
+		if(cmd == "search"||cmd =="quit"||cmd =="attack"||cmd =="move north"||cmd =="move south"||cmd =="save"||cmd =="equip dagger"||cmd =="equip sword"||cmd =="equip axe"||cmd =="inventory")
 		{
 		
 		CommandFactory comm(this);

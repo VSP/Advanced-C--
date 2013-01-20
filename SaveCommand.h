@@ -14,6 +14,7 @@ class Game;
 ////////////////////////////////////////////////////////////////////////////////
 class SaveCommand  : public Command
 {
+friend class CommandFactory;
 public:
   SaveCommand( Game *pGame ) : Command(pGame) { }
 

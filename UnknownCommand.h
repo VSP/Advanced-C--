@@ -11,6 +11,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 class UnknownCommand  : public Command
 {
+friend class CommandFactory;
 public:
   UnknownCommand( Game *pGame ) : Command(pGame) { }
   

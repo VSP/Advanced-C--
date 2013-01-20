@@ -11,6 +11,8 @@
 #include "UnknownCommand.h"
 #include "SaveCommand.h"
 #include "MoveCommand.h"
+#include "ChangeCommand.h"
+#include "InventoryCommand.h"
 #include "Game.h"
 #include <sstream>
 #include <string>
@@ -42,6 +44,10 @@ CommandFactory::Create( const std::string & str )
   if ( word =="save")
   {
 	return new SaveCommand (m_pGame);
+  }
+  if (word =="inventory")
+  {
+   return new InventoryCommand (m_pGame);
   }
 
   if ( word == "move" )
@@ -75,6 +81,30 @@ CommandFactory::Create( const std::string & str )
       return command;
     }
 
+  }
+  if (word =="equip")
+  {
+   string wep;
+   s >> wep;
+   ChangeCommand *command = NULL;
+   if (wep =="dagger")
+   {
+	command = new ChangeCommand(m_pGame);
+	command->SetWeapon(Dagger);
+	return command;
+   }
+   else if (wep =="sword")
+   {
+    command = new ChangeCommand(m_pGame);
+	command->SetWeapon(Sword);
+	return command;
+   }
+   else if (wep =="axe")
+   {
+   	command = new ChangeCommand(m_pGame);
+	command->SetWeapon(Axe);
+	return command;
+   }
   }
 
   return new UnknownCommand(m_pGame);  

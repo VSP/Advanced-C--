@@ -19,8 +19,8 @@ void SaveCommand::Execute()
   saveFile << GetGame()->GetPlayer().GetAge() << "\n";
   saveFile << GetGame()->GetPlayer().GetGender() << "\n";
   saveFile << GetGame()->GetPlayer().GetExperience() << "\n";
-  saveFile << GetGame()->GetCurrentRoom()->GetID();
-  
+  saveFile << GetGame()->GetCurrentRoom()->GetID() << "\n";
+  saveFile << GetGame()->GetPlayer().pMoney.GetAmount();
   
   //saveFile << enemy.IsAlive() << "\n";
   saveFile.close();

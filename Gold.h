@@ -12,13 +12,26 @@ class GoldFactory;
 class Gold 
 {
   friend class GoldFactory;
+  friend class InventoryCommand;
+  friend class Player;
+  
 private:
-  unsigned int m_nAmount;
-  Gold(unsigned int value);
+	unsigned int m_nAmount;
+	Gold(unsigned int nAmount);
+	Gold();
 public:
-  virtual ~Gold();
-  unsigned int GetAmount() const;
-  void SetAmount( unsigned int value );
+	
+	virtual ~Gold();
+	unsigned int GetAmount() const;
+	void SetAmount( unsigned int value );
+	Gold& operator+=(const Gold* g)
+	{
+		m_nAmount += g->GetAmount();
+		return *this;
+		
+	}
 };
+////////////////////////////////////////
+
 ////////////////////////////////////////////////////////////////////////////////
 #endif

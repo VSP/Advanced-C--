@@ -31,7 +31,7 @@ Player::Attack( GameObject *pObject )
   {
     // convert this into weapon 
     // with damage property
-    pObject->SetHitpoints(hp-1); 
+    pObject->SetHitpoints(hp-pWeapon); 
     ostringstream s;
     s << GetName() << " hits!\n";
     game->GetRenderer()->Render( s.str() );
@@ -118,6 +118,8 @@ Player::Load (Player & p)
       f >> iTmp; p.SetExperience(iTmp);
       
 	  f >> iTmp; p.SetWhereID(iTmp);
+	  
+	  f >> iTmp; p.pMoney.SetAmount(iTmp);
     }
 	}
 	f.close();

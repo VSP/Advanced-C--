@@ -8,13 +8,24 @@
 #define __Player_h__
 #include <string>
 #include "GameObject.h"
+#include "Gold.h"
+#include "Weapons.h"
 class Game;
+
 ////////////////////////////////////////////////////////////////////////////////
 class Player : public GameObject
 {
+friend class ChangeCommand;
+friend class SearchCommand;
+friend class InventoryCommand;
+friend class SaveCommand;
+
 private:
   Game *game;
   int whereID;
+  Gold pMoney; 
+  int  pWeapon;
+  
 public:
   
   Player();

@@ -11,6 +11,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 class QuitCommand : public Command 
 {
+friend class CommandFactory;
 public:
   QuitCommand( Game *pGame ) : Command(pGame){}
   void Execute()

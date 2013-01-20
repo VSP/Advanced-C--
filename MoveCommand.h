@@ -11,6 +11,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 class MoveCommand : public Command 
 {
+friend class CommandFactory;
 private:
   Direction direction; ///< Movement direction.
 public:

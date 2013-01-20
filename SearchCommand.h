@@ -12,26 +12,34 @@
 #include "Game.h"
 #include <sstream>
 #include "IRenderer.h"
+/////
+
 ////////////////////////////////////////////////////////////////////////////////
 class SearchCommand : public Command
 {
+friend class CommandFactory;
 public:
   SearchCommand( Game *pGame ) : Command(pGame) {}
-  void Execute()
+    void Execute()
   {
     if ( rand()%1000 < 436 )
     {
       GoldFactory f;
-      Gold *g = f.Create( 1+rand()%100 );
+      int npMoney;
+	  Gold *g = f.Create( 1+rand()%100 );
+	  
       std::ostringstream s;
-      s << "You found " << g->GetAmount() << " gold!\n";
-      GetGame()->GetRenderer()->Render(s.str());
-      delete g;
+     s << "You found " << g->GetAmount() << " gold!\n";
+	 
+     GetGame()->GetRenderer()->Render(s.str());
+	 GetGame()->GetPlayer().pMoney+=g;
+     delete g;
     }
     else {
       GetGame()->GetRenderer()->Render( "You found nothing.\n");
-    }
+   }
   }
+
 };
 ////////////////////////////////////////////////////////////////////////////////
 #endif

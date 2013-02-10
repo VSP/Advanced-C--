@@ -13,26 +13,28 @@
 #include <iostream>
 #include <fstream>
 #include "TextRenderer.h"
+#include "TemplateRenderer.h"
 #include <sstream>
 #include "IRenderer.h"
 #include "CommandFactory.h"
 #include "Dungeon.h"
 #include "Hallway.h"
 #include "MonsterRoom.h"
+#include "NPC_Room.h"
 #include "Chambers.h"
 #include "globals.h"
 #include "Exceptions.h"
 #include <ctime>
+#include <string>
 ////////////////////////////////////////////////////////////////////////////////
 using namespace std;
 #define DEV_NAME "anssi.grohn@pkamk.fi"
 #define YEAR 2013
 
 ////////////////////////////////////////////////////////////////////////////////
-Game::Game() : running(true)
+Game::Game() : running(true), r(*new TextRenderer)
 {
-  renderer = new TextRenderer();
-
+  renderer =new TextRenderer;
 
   rooms[kDungeon] = new Dungeon();
   rooms[kDungeon]->SetGame(this);
@@ -40,6 +42,9 @@ Game::Game() : running(true)
   rooms[kHallway] = new Hallway();
   rooms[kHallway]->SetGame(this);
 
+  rooms [kNPC] = new NPCRoom();
+  rooms [kNPC]->SetGame(this);
+  
   rooms[kMonster] = new MonsterRoom();
   rooms[kMonster]->SetGame(this);
   
@@ -49,9 +54,12 @@ Game::Game() : running(true)
   rooms[kDungeon]->SetNextRoom(North,rooms[kHallway]);
 
   rooms[kHallway]->SetNextRoom(South,rooms[kDungeon]);
-  rooms[kHallway]->SetNextRoom(North,rooms[kMonster]);
-
-  rooms[kMonster]->SetNextRoom(South,rooms[kHallway]);
+  rooms[kHallway]->SetNextRoom(North,rooms[kNPC]);
+  
+  rooms[kNPC]->SetNextRoom(South,rooms[kHallway]);
+  rooms[kNPC]->SetNextRoom(North,rooms[kMonster]);
+  
+  rooms[kMonster]->SetNextRoom(South,rooms[kNPC]);
   rooms[kMonster]->SetNextRoom(North,rooms[kChambers]);
 
   rooms[kChambers]->SetNextRoom(South,rooms[kMonster]);
@@ -79,7 +87,7 @@ void Game::Play()
   getline(cin,cmd);
   if(cmd == "load")
   {
-	renderer->Render("Load Started\n");
+	r <<"Load Started\n";
 	Player::Load(player);
   }
   else
@@ -91,6 +99,10 @@ void Game::Play()
   if(cmd =="load")
   {
   renderer->Render("\nAnd behold, the adventure continues!\n");
+  trenderer->Render(1);
+  trenderer->Render("test");
+  trenderer->Render(2);
+  trenderer->Render("ha");
   }
   else
 	renderer->Render("\nAnd behold, the adventure begins!\n");
@@ -138,7 +150,7 @@ void Game::Play()
 	try
 	{
 		//Make this a bit better
-		if(cmd == "search"||cmd =="quit"||cmd =="attack"||cmd =="move north"||cmd =="move south"||cmd =="save"||cmd =="equip dagger"||cmd =="equip sword"||cmd =="equip axe"||cmd =="inventory")
+		if(cmd == "search"||cmd == "talk"||cmd =="quit"||cmd =="attack"||cmd =="move north"||cmd =="move south"||cmd =="save"||cmd =="equip dagger"||cmd =="equip sword"||cmd =="equip axe"||cmd =="inventory")
 		{
 		
 		CommandFactory comm(this);
@@ -222,5 +234,11 @@ Game::SetCurrentRoom( Room *pRoom )
 {
   currentRoom = pRoom;
 }
-////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+/////////////////
+IRenderer & 
+Game::GetR() const
+{
+	return r;
+}
 

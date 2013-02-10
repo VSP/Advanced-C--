@@ -19,12 +19,15 @@ friend class ChangeCommand;
 friend class SearchCommand;
 friend class InventoryCommand;
 friend class SaveCommand;
+friend class NPCRoom;
+friend class TalkCommand;
 
 private:
   Game *game;
   int whereID;
   Gold pMoney; 
   int  pWeapon;
+  bool tDistance;
   
 public:
   

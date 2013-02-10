@@ -13,6 +13,7 @@
 #include "MoveCommand.h"
 #include "ChangeCommand.h"
 #include "InventoryCommand.h"
+#include "TalkCommand.h"
 #include "Game.h"
 #include <sstream>
 #include <string>
@@ -27,6 +28,11 @@ CommandFactory::Create( const std::string & str )
   std::string word;
   s >> word;
 
+  
+  if ( word == "talk")
+  {
+    return new TalkCommand(m_pGame);
+  }
   if ( word == "quit" )
   {
     return new QuitCommand(m_pGame);

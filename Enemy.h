@@ -22,7 +22,7 @@ public:
   }
   
   bool IsAlive() const { return GetHitpoints() > 0; }
-
+  
   void Attack( GameObject *pObject )
   {
     int hp = pObject->GetHitpoints();

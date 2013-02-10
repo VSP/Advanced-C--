@@ -16,6 +16,7 @@ using namespace std;
 Player::Player()
 {
   SetHitpoints(3);
+  tDistance = false;
 }
 ////////////////////////////////////////////////////////////////////////////////
 Player::~Player()

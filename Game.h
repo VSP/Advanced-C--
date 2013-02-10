@@ -10,19 +10,23 @@
 class IRenderer;
 class Room;
 ////////////////////////////////////////////////////////////////////////////////
-enum RoomId { kDungeon, kHallway, kMonster, kChambers, kNumRooms };
+enum RoomId { kDungeon, kHallway, kMonster, kChambers, kNPC, kNumRooms };
 #include "Player.h"
 #include "Enemy.h"
+#include "TemplateRenderer.h"
 ////////////////////////////////////////////////////////////////////////////////
 
 
 class Game 
+
 {
 
 private:
   bool running;
   Player player;
-  IRenderer *renderer;
+  TemplateRenderer *trenderer;
+  IRenderer * renderer;
+  IRenderer & r;
   Room      *rooms[kNumRooms]; ///< Map.
   Room      *currentRoom;
 public:
@@ -31,6 +35,7 @@ public:
   void Play();
   void SetRenderer( IRenderer *pRenderer );
   IRenderer * GetRenderer() const;
+  IRenderer & GetR() const;
   bool IsRunning() const;
   void SetRunning(bool bFlag ) ;
   Player & GetPlayer();

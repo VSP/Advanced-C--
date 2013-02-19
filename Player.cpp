@@ -17,20 +17,24 @@ using namespace std;
 ////////////////////////////////////////////////////////////////////////////////
 Player::Player()
 {
-  SetHitpoints(3);
+  
   tDistance = false;
   //Item *s = new Item();
   Item *wD = new Item(1,1);
   Item *wS = new Item(2,1);
   Item *wA = new Item(5,1);
-  Item *pP = new Item(3);
+  
+  Item *pP1 = new Item(3);
+
   //s->name ="Axe";
   //s-> wDmg=5;
   AddItem("Sword", wS);
   AddItem("Axe", wA);
   AddItem("Dagger", wD);
-  AddItem("Potion", pP);
- 
+  AddItem("Potion", pP1);
+
+  map<const string,int >StatMap{{"Stamina",3},{"Dex",1}};
+  SetHitpoints(3);
 }
 ////////////////////////////////////////////////////////////////////////////////
 Player::~Player()

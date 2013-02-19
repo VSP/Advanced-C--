@@ -4,18 +4,19 @@
 ////////////////////////////////////////////////////////////////////////////////
 void AttackCommand::Execute()
 {
-for(int i=0; i<GetGame()->GetEnemies().size();i++)
+
+for(auto enemy: GetGame()->GetEnemies())
 {
-  if ( GetGame()->GetEnemies().at(i)->IsAlive() && GetGame()->GetEnemies().at(i)->Aggro==true)
+  if ( enemy->IsAlive() && enemy->Aggro==true)
     {
       Player & player = GetGame()->GetPlayer();
       std::ostringstream s;
-      s << player.GetName() << " attacks " << GetGame()->GetEnemies().at(i)->GetName() << "\n";
+      s << player.GetName() << " attacks " << enemy->GetName() << "\n";
       GetGame()->GetRenderer()->Render(s.str());
-      player.Attack( GetGame()->GetEnemies().at(i) );
+      player.Attack( enemy );
       // Change room description a bit
 	  
-      if ( GetGame()->GetEnemies().at(i)->IsAlive() == false )
+      if (enemy->IsAlive() == false )
       {
 		//SetDescription("You are in the monster room. There is a pretty dead orc here.");
       }

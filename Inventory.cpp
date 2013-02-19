@@ -2,8 +2,8 @@
 
 Inventory::~Inventory()
 {
-	for(std::map<std::string, Item*>::iterator it = inventory.begin(); it != inventory.end();++it)
-		if(it->second) delete it-> second;
+	for(auto item : inventory)
+		if(item.second) delete item.second;
 		
 	inventory.clear();
 }
@@ -11,7 +11,7 @@ Inventory::~Inventory()
 void
 Inventory::RemoveItem(const string& name)
 {
-	std::map<std::string, Item*>::iterator it = inventory.find(name);
+	auto it = inventory.find(name);
 	delete it->second;
 	inventory.erase(it);
 
@@ -27,16 +27,16 @@ Inventory::AddItem(const string& name, Item* pItem)
 Item* 
 Inventory::Find(const string& name)
 {
-	std::map<std::string, Item*>::iterator it = inventory.find(name);
+	auto it = inventory.find(name);
 	if(it!=inventory.end()) return it->second;
 	else return NULL;
 }
 void
 Inventory::RenderAll()
 {
-	for(std::map<std::string, Item*>::iterator it = inventory.begin(); it != inventory.end(); ++it)
+	for(auto item : inventory)
 	{
-		cout << it->first;
+		cout << item.first;
 		cout <<"\n";
 	}
 	cout << inventory.size();

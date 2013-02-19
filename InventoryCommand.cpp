@@ -21,7 +21,7 @@ InventoryCommand::Execute()
 	
 	GetGame()->GetPlayer().RenderAll();
 	std::ostringstream s;
-	GetGame()->GetRenderer()->Render("\nYou have a sword, an axe and a dagger\n");
+	//GetGame()->GetRenderer()->Render("\nYou have a sword, an axe and a dagger\n");
 	
 	s << "You have " << GetGame()->GetPlayer().pMoney.GetAmount() << " gold!\n";
     GetGame()->GetRenderer()->Render(s.str());

@@ -13,7 +13,6 @@
 #include <iostream>
 #include <fstream>
 #include "TextRenderer.h"
-#include "TemplateRenderer.h"
 #include <sstream>
 #include "IRenderer.h"
 #include "CommandFactory.h"
@@ -24,8 +23,10 @@
 #include "Chambers.h"
 #include "globals.h"
 #include "Exceptions.h"
+#include "Enemy.h"
 #include <ctime>
 #include <string>
+
 ////////////////////////////////////////////////////////////////////////////////
 using namespace std;
 #define DEV_NAME "anssi.grohn@pkamk.fi"
@@ -35,6 +36,8 @@ using namespace std;
 Game::Game() : running(true), r(*new TextRenderer)
 {
   renderer =new TextRenderer;
+  
+
 
   rooms[kDungeon] = new Dungeon();
   rooms[kDungeon]->SetGame(this);
@@ -66,15 +69,34 @@ Game::Game() : running(true), r(*new TextRenderer)
   
   currentRoom = rooms[kDungeon];
 
-
-
+  
+  //enemy = new Enemy(dynamic_cast<Game*>GetGame()));
+  //enemy->SetEnemy(rooms[kMonster]);
+  s = new Scene();
+  s->SetGame(this);
+  
+  eGuard = new Enemy();
+  eGuard->SetGame(this);
+  eGuard->SetName("Orc Guard");
+  eGuard->CanMove=false;
+  eGuard->SetRoom(rooms[kMonster]);
+  s->GetUpdateables().push_back(eGuard);
+  e.push_back(eGuard);
+  ePatrol = new Enemy();
+  ePatrol->SetGame(this);
+  ePatrol->SetName("NinjaPirate");
+  ePatrol->SetRoom(rooms[kMonster]);
+  s->GetUpdateables().push_back(ePatrol);
+  e.push_back(ePatrol);
 }
 ////////////////////////////////////////////////////////////////////////////////
 Game::~Game()
 {
 
 }
-////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+
+/////////////////
 void Game::Play()
 {
   string cmd;
@@ -99,10 +121,6 @@ void Game::Play()
   if(cmd =="load")
   {
   renderer->Render("\nAnd behold, the adventure continues!\n");
-  trenderer->Render(1);
-  trenderer->Render("test");
-  trenderer->Render(2);
-  trenderer->Render("ha");
   }
   else
 	renderer->Render("\nAnd behold, the adventure begins!\n");
@@ -150,7 +168,7 @@ void Game::Play()
 	try
 	{
 		//Make this a bit better
-		if(cmd == "search"||cmd == "talk"||cmd =="quit"||cmd =="attack"||cmd =="move north"||cmd =="move south"||cmd =="save"||cmd =="equip dagger"||cmd =="equip sword"||cmd =="equip axe"||cmd =="inventory")
+		if(cmd == "search"||cmd == "drink potion"||cmd == "talk"||cmd =="quit"||cmd =="attack"||cmd =="move north"||cmd =="move south"||cmd =="save"||cmd =="equip dagger"||cmd =="equip sword"||cmd =="equip axe"||cmd =="inventory")
 		{
 		
 		CommandFactory comm(this);
@@ -171,8 +189,9 @@ void Game::Play()
    // ICommand *pCommand = comm.Create( cmd ); 
    // if ( pCommand ) pCommand->Execute();
    // delete pCommand;
-
+	Update();
     GetCurrentRoom()->Update();
+	
        try 
 		{
 	
@@ -234,11 +253,25 @@ Game::SetCurrentRoom( Room *pRoom )
 {
   currentRoom = pRoom;
 }
-///////////////////////////////////////////////////////////////
-/////////////////
+//////////////////////////////////////////////////////////
+
+//////////////////////
 IRenderer & 
 Game::GetR() const
 {
 	return r;
+}
+////////
+
+void
+Game::Update()
+{
+	s->Update();
+}
+
+Enemy *
+Game::GetEnemy()
+{
+	return eGuard;
 }
 

@@ -10,62 +10,74 @@
 #include "Enemy.h"
 #include <sstream>
 #include "MoveCommand.h"
+#include <vector>
+#include "Scene.h"
+/////////////////////////////////////////////
+//typedef vector<Enemy > EList;
 ////////////////////////////////////////////////////////////////////////////////
 class MonsterRoom : public Room
 {
 private:
-  Enemy e;
+  
+  
+
   bool noticedPlayer;
   int ID;
 public:
   MonsterRoom()
   {
+	
 	SetID(1);
-    noticedPlayer = false;
-    e.SetName( "Orc");
-    SetDescription("You are in the monster room. There is an orc here!");
+	
+	
+	
+    SetDescription("You are in the monster room. bones etc.");
   }
+  
   ////////////////////
   /// Makes enemy attack player once on every turn.
-  void Update()
+  void Update(){}
+  /*
   {
-    if ( e.IsAlive() && noticedPlayer )
+    if ( evec.at(0).IsAlive() && noticedPlayer )
     {
       std::ostringstream s;
       Player & player = GetGame()->GetPlayer();
-      s << e.GetName() << " attacks " << player.GetName() << "\n";
+      s << evec.at(0).GetName() << " attacks " << player.GetName() << "\n";
       GetGame()->GetRenderer()->Render(s.str());
 
-      e.Attack(&player);
+      evec.at(0).Attack(&player);
 
     }
     noticedPlayer = true;
   }
+  */
+  /*
   ////////////////////
   /// Restricts movement until enemy is killed.
   /// \param pCommand Move command.
   /// \return Room pointer to next available room, NULL if none available.
   Room * OnMoveCommand( MoveCommand *pCommand )
   {
-    if ( e.IsAlive())
+    if ( evec.at(0).IsAlive())
     {
       return NULL;
     }
     else
       return GetNextRoom( pCommand->GetDirection() );
   }
-  
+  /*
   void OnAttack( AttackCommand *pCommand )
   {
-    if ( e.IsAlive() && noticedPlayer)
+    if ( evec.at(1).IsAlive() && noticedPlayer)
     {
       Player & player = GetGame()->GetPlayer();
       std::ostringstream s;
-      s << player.GetName() << " attacks " << e.GetName() << "\n";
+      s << player.GetName() << " attacks " << evec.at(0).GetName() << "\n";
       GetGame()->GetRenderer()->Render(s.str());
-      player.Attack( &e );
+      player.Attack( &evec.at(1) );
       // Change room description a bit
-      if ( e.IsAlive() == false )
+      if ( evec.at(0).IsAlive() == false )
       {
 	SetDescription("You are in the monster room. There is a pretty dead orc here.");
       }
@@ -77,7 +89,7 @@ public:
     }
 
   }
-
+*/
 };
 ////////////////////////////////////////////////////////////////////////////////
 #endif

@@ -14,6 +14,7 @@
 #include "ChangeCommand.h"
 #include "InventoryCommand.h"
 #include "TalkCommand.h"
+#include "DrinkCommand.h"
 #include "Game.h"
 #include <sstream>
 #include <string>
@@ -41,6 +42,20 @@ CommandFactory::Create( const std::string & str )
   if ( word == "search")
   {
     return new SearchCommand(m_pGame);
+  }
+  
+  if ( word == "drink")
+  {
+    string what;
+    s >> what;
+    //cout << "got dir '" << dir << "'\n";
+    DrinkCommand *command = NULL;
+    if ( what == "potion" )
+    {
+      command = new DrinkCommand(m_pGame);
+      command->SetDrinkWhat(hp);
+      return command;
+    }
   }
   
   if ( word == "attack" )

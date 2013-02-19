@@ -11,19 +11,33 @@
 #include <sstream>
 #include <iostream>
 #include <fstream>
+
+
 using namespace std;
 ////////////////////////////////////////////////////////////////////////////////
 Player::Player()
 {
   SetHitpoints(3);
   tDistance = false;
+  //Item *s = new Item();
+  Item *wD = new Item(1,1);
+  Item *wS = new Item(2,1);
+  Item *wA = new Item(5,1);
+  Item *pP = new Item(3);
+  //s->name ="Axe";
+  //s-> wDmg=5;
+  AddItem("Sword", wS);
+  AddItem("Axe", wA);
+  AddItem("Dagger", wD);
+  AddItem("Potion", pP);
+ 
 }
 ////////////////////////////////////////////////////////////////////////////////
 Player::~Player()
 {
   
 }
-////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////,////////////////////////
 void
 Player::Attack( GameObject *pObject )
 {
@@ -141,4 +155,16 @@ int
 Player::GetWhereID()
 {
 	return whereID;
+}
+/////////////////////
+void
+Player::SetDesc(string s)
+{
+	roomdesc = s;
+}
+//////////////////////////////////////////////////////
+string
+Player::GetDesc()
+{
+	return roomdesc;
 }

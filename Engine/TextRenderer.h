@@ -12,13 +12,11 @@
 class TextRenderer : public IRenderer
 {
 public:
-
   void Render( const string & str )
   {
     std::cout << str;
   }
-
-
+	
 };
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -14,7 +14,6 @@ class IRenderer
 {
 public:
   virtual void Render( const std::string & str ) = 0;
-
 };
 template <class TYPE>
 IRenderer& operator<<(IRenderer & test, TYPE & str)

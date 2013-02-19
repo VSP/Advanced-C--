@@ -10,14 +10,21 @@
 #include "Command.h"
 class Game;
 #include "Dungeon.h"
+#include "Scene.h"
 #include <sstream>
-////////////////////////////////////////////////////////////////////////////////
+#include <list>
+////////////////////////////////////////////////////////
+////////////////////////
+//class Scene;
 class AttackCommand  : public Command
 {
+private:
+	//Scene *s;
+	//Game *game;
 public:
   AttackCommand( Game *pGame ) : Command(pGame) { }
-
-  
+  //Game* GetGame(){return game;}
+  //void AttackTest();
   void Execute();
   /*
   {

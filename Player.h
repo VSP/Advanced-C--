@@ -10,10 +10,15 @@
 #include "GameObject.h"
 #include "Gold.h"
 #include "Weapons.h"
-class Game;
+#include "Inventory.h"
+#include "Sword.h"
+#include "Axe.h"
+//#include "Enemy.h"
 
+class Game;
+class Enemy;
 ////////////////////////////////////////////////////////////////////////////////
-class Player : public GameObject
+class Player : public GameObject, public Inventory
 {
 friend class ChangeCommand;
 friend class SearchCommand;
@@ -21,6 +26,8 @@ friend class InventoryCommand;
 friend class SaveCommand;
 friend class NPCRoom;
 friend class TalkCommand;
+friend class DrinkCommand;
+
 
 private:
   Game *game;
@@ -28,6 +35,8 @@ private:
   Gold pMoney; 
   int  pWeapon;
   bool tDistance;
+  string roomdesc;
+  
   
 public:
   
@@ -44,6 +53,10 @@ public:
   void SetWhereID(int id);
   int GetWhereID();
   
+  void SetDesc(string s);
+  string GetDesc();
+  
+  Inventory GetInv();
 };
 ////////////////////////////////////////////////////////////////////////////////
 #endif

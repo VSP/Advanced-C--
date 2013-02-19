@@ -29,10 +29,11 @@ public:
   void SetGame( Game * pGame );
   Game * GetGame() const;
   void SetDescription( const std::string & desc );
+  
   const std::string & GetDescription() const;
   void   SetNextRoom( Direction d, Room * pRoom );
   Room * GetNextRoom( Direction d );
-
+  
   virtual Room * OnMoveCommand( MoveCommand *pCommand );
   virtual void   OnAttack( AttackCommand *pCommand );
   

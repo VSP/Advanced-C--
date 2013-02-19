@@ -11,8 +11,9 @@
 #include "Weapons.h"
 #include "Player.h"
 #include "Game.h"
+#include "Inventory.h"
 
-
+class Inventory;
 class Game;
 //class Player;
 
